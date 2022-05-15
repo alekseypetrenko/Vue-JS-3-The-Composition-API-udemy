@@ -6,6 +6,7 @@
         :key="period"
         :class="{ 'is-active': period === currentPeriod }"
         @click="setPeriod(period)"
+        :data-test="period"
       >
         {{ period }}</a
       >
@@ -27,8 +28,11 @@ type Period = "Today" | "This Week" | "This Month";
 export default defineComponent({
   name: "TimeLine",
   setup() {
-    const periods = ["Today", "This Week", "This Month"];
+    const periods: Period[] = ["Today", "This Week", "This Month"];
     const currentPeriod = ref<Period>("Today");
+    const setPeriod = (period: Period): void => {
+      currentPeriod.value = period;
+    };
     const posts = computed(() => {
       return [today, thisWeek, thisMonth].filter((post) => {
         if (currentPeriod.value === "Today") {
@@ -42,10 +46,6 @@ export default defineComponent({
         }
       });
     });
-
-    const setPeriod = (period: Period) => {
-      currentPeriod.value = period;
-    };
 
     return { posts, periods, currentPeriod, setPeriod };
   },
