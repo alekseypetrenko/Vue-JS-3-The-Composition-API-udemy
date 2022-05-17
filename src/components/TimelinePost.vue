@@ -1,7 +1,9 @@
 <template>
   <a :key="post.id" class="panel-block">
-    <a>{{ post.title }}</a>
-    <div>{{ post.created.format("Do MMM") }}</div>
+    <div class="is-flex is-flex-direction-column is-align-items-flex-start">
+      <a>{{ post.title }}</a>
+      <div>{{ post.created.format("Do MMM") }}</div>
+    </div>
   </a>
 </template>
 
